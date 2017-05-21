@@ -1,7 +1,7 @@
 //settings
 $max-width: 100% 
 $columns: 12
-$margin-l-r: 1em
+$margin-l-r: .5em
 $margin-t-b: .5em
 $padding-l-r: 1%
 $padding-t-b: .5em
@@ -9,10 +9,14 @@ $container-max-width: 1366px
 $container-min-width: 320px
 $default-width-col: 100%/$columns
 
+$part-margin: ($margin-l-r/$columns)*2
+$default-width-col-slick-row: 100%+3px/$columns
+
 // media
 $media: ('lg': '1100', 'md': '960', 'sm':'768', 'xs': '567');
 
 .container
+  height: $part-margin
   max-width: $max-width
   margin: 0 auto
 
@@ -35,6 +39,13 @@ $media: ('lg': '1100', 'md': '960', 'sm':'768', 'xs': '567');
         &strech
             align-items: strech;  
 
+.flex-row-stick
+    [class*="col-"]
+        &:first-child
+            margin-left: 0
+        &:last-child
+            margin-right: 0
+
 .justify-start
   justify-content: flex-start
 
@@ -48,6 +59,9 @@ $media: ('lg': '1100', 'md': '960', 'sm':'768', 'xs': '567');
     flex-grow: 1
 =col($n)
   width:  calc(#{$default-width-col*$n} - #{$margin-l-r * 2}) 
+
+=colSlick($x)
+   width:  calc((#{$default-width-col-slick-row})*#{$x} - #{$margin-l-r * 2})
 
 // Compiller
 [class*="col-"], 
@@ -67,3 +81,7 @@ $media: ('lg': '1100', 'md': '960', 'sm':'768', 'xs': '567');
             .col-#{$name}-#{$i}
                 +col($i)    
     
+.flex-row-stick
+    @for $y from 1 through $columns
+        .col-#{$y}
+            +colSlick($y)
