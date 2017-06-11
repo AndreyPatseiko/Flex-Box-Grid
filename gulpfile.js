@@ -18,6 +18,6 @@ gulp.task('sass', function(){
         .pipe(browserSync.reload({stream: true}))
 });
 
-gulp.task('watch',['browser-sync', 'sass'], function(){
+gulp.task('default',['browser-sync', 'sass'], function(){
     gulp.watch('./dist/**/*.sass', ['sass']);
 })

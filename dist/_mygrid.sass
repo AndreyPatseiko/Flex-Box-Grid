@@ -8,11 +8,9 @@ $padding-t-b: .5em
 $container-max-width: 1366px
 $container-min-width: 320px
 $default-width-col: 100%/$columns
-
-$big-width-row:  (calc(100% + #{$margin-l-r * 2}))
-
 // media
-$media: ('lg': '1100', 'md': '960', 'sm':'768', 'xs': '567');
+$media: ('lg': '1100', 'md': '960', 'sm':'768', 'xs': '567')
+//=======     END Settings      ===========
 
 .container
   max-width: $max-width
@@ -20,39 +18,33 @@ $media: ('lg': '1100', 'md': '960', 'sm':'768', 'xs': '567');
 
 .flex-row
   display: flex
-  justify-content: flex-start  
-  .flex-row
-    margin-top: -$margin-t-b
-    margin-left: -$margin-l-r
-    width: calc(100% + #{$margin-l-r * 2})  
-  &.wrap
-    flex-wrap: wrap 
-  &.align-
-        &top
-            align-items: flex-start
-        &bottom
-            align-items: flex-end        
-        &center
-            align-items: center        
-        &strech
-            align-items: stretch  
+  justify-content: flex-start
+.wrap
+  flex-wrap: wrap
+.align-
+  &top
+      align-items: flex-start
+  &bottom
+      align-items: flex-end
+  &center
+      align-items: center
+  &stretch
+      align-items: stretch
 
 .flex-row-stick
-    display: flex
-    [class*="col-"]
-        &:first-child
-            margin-left: 0
-        &:last-child
-            margin-right: 0
+  display: flex
+  width: calc(100% + #{$margin-l-r}*2)
+  margin-left: -#{$margin-l-r}
+  &.wrap
+    flex-wrap: wrap
 
-.justify-start
-  justify-content: flex-start
-
-.justify-center
-  justify-content: center
-
-.justify-end
-  justify-content: flex-end
+.justify
+  &-start
+    justify-content: flex-start
+  &-center
+    justify-content: center
+  &-end
+    justify-content: flex-end
 
 .box
     flex-grow: 1
@@ -60,34 +52,29 @@ $media: ('lg': '1100', 'md': '960', 'sm':'768', 'xs': '567');
 =col($n)
   width:  calc(#{$default-width-col*$n} - #{$margin-l-r * 2}) 
 
-=colSlick($x)
-    width:  calc( (#{$big-width-row}/ #{$columns} * #{$x}) - #{$margin-l-r * 2} ) 
-
-// Compiller
+// Compiler
 [class*="col-"], 
 .box 
-    margin: $margin-t-b $margin-l-r
-    padding: $padding-t-b $padding-l-r
-    box-sizing: border-box
+  margin: $margin-t-b $margin-l-r
+  padding: $padding-t-b $padding-l-r
+  box-sizing: border-box
+  .flex-row
+    margin-top: -$margin-t-b
+    margin-bottom: -$margin-t-b
+    margin-left: -$padding-l-r
+    width: calc(100% + #{$padding-l-r * 2})
 
 @for $i from 1 through $columns
     .col-#{$i}
         +col($i)
+    .offset-left-#{$i}
+        margin-left: calc(#{$default-width-col*$i} + #{$margin-l-r})
+    .offset-right-#{$i}
+        margin-right: calc(#{$default-width-col*$i} + #{$margin-l-r})
 
 @each $name, $size in $media 
     /* #{$name} */
-    @media all and (max-width:#{$size}px)
+    @media all and (max-width: #{$size}px)
         @for $i from 1 through $columns
             .col-#{$name}-#{$i}
                 +col($i)    
-    
-.flex-row-stick
-    @for $y from 1 through $columns
-        .col-#{$y}
-            +colSlick($y)
-    @each $name, $size in $media 
-        /* flex-row-stick #{$name} */
-        @media all and (max-width:#{$size}px)
-            @for $i from 1 through $columns
-                .col-#{$name}-#{$i}
-                    +colSlick($i)  

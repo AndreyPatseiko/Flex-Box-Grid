@@ -4,77 +4,140 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Test smart grid</title>
+    <title>Инструкция по использованию сетки</title>
     <link rel="stylesheet" href="./dist/css/style.css">
 </head>
 <body>
     <div class="container">
+        <h2>Настройка</h2>
+        <p>Для настройки сетки необходимо задате некоторве исходные данные в файле самой сетки. После чего она автоматически скомилируется и ее можно использовать как обычный css в проекте.</p>
+        <p>Для компиляции необходим npm и установленный gulp. Команда для компиляции после выполнения npm i и насторойки сетки gulp.</p>
+        <h2>Структура сетки</h2>
+        <p>Для построения сетки необходимо использовать вложенность данного вида</p>
+        <p>
+        <code>
+            <span><</span>div class='flex-row'<span>></span></br>
+            <span class="m-l-1"><</span>div class='col-6'<span>></span>Text or another content<</span>/div<span>></span></br>
+            <span class="m-l-1"><</span>div class='col-6'<span>></span>Text or another content<</span>/div<span>></span></br>
+            <</span>/div<span>></span></br>
+        </code>
+
+        <h2>Типы сеток</h2>
+        <h3>flex-row-stick</h3>
+        <p>Имеет отступы для каждой вложенной ячейки</p>
         <div class='flex-row'>
-            <span class="col-1">1</span>
-            <span class="col-2">2</span>
-            <span class="col-1">1</span>
-            <span class="col-3">3</span>
-            <span class="col-1">1</span>
-            <span class="col-1">1</span>
-            <span class="col-1">1</span>
-            <span class="col-2">2</span>
+            <span class="col-1">col-1</span>
+            <span class="col-2">col-2</span>
+            <span class="col-1">col-1</span>
+            <span class="col-3">col-3</span>
+            <span class="col-1">col-1</span>
+            <span class="col-1">col-1</span>
+            <span class="col-1">col-1</span>
+            <span class="col-2">col-2</span>
+            <span class="col-2">col-2</span>
         </div>
+
+        <h3>flex-row-stick</h3>
+        <p>Не имеет отступы для первой и последней ячейки. Создает эффект 'прилиания к краям'.
+        <small>Для получения данного эффекта используется увелицение размера обертки и отридцательный margin-left.</small></p>
+        <div class='flex-row-stick'>
+            <span class="col-2">col-2</span>
+            <span class="col-3">col-3</span>
+            <span class="col-1">col-1</span>
+            <span class="col-3">col-3</span>
+            <span class="col-3">col-3</span>
+        </div>
+
+        <h2>Выравнивание и позиционированние блоков.</h2>
+        <p>Можно выравнивать блоки внутри Flex-row, с помощь доплонительного класс для контейнера с классои flex-row</p>
+        <p>Также есть возможность выравнивания по вертикали с помощью добавления align-top/align-center/align-bottom/align-stretch || justify-start/justify-center/justify-end классу flex-row</p>
+        <p>justify-start</p>
+        <div class='flex-row justify-start'>
+            <span class="col-3">col-3</span>
+            <span class="col-4">col-4</span>
+        </div>
+        <p>justify-center <small>Внимание! выравнивает по центру не совсем по сетке.</small></p>
+        <div class='flex-row justify-center'>
+            <span class="col-3">col-3</span>
+            <span class="col-4">col-4</span>
+        </div>
+        <p>justify-end</p>
         <div class='flex-row justify-end'>
-            <span class="col-3">3</span>
-            <span class="col-4">4</span>
+            <span class="col-3">col-3</span>
+            <span class="col-4">col-4</span>
         </div>
-        <div class='flex-row-wrap'>
-            <span class="col-12">12</span>       
-            <span class="col-6">6</span>       
+
+
+        <h3>Смещение элементов классом offset- (задается блоку col-)</h3>
+        <div class="container">
+            <div class="flex-row">
+                <span class="col-1">col-1</span>
+                <span class="col-1">col-1</span>
+                <span class="col-2">col-2</span>
+                <span class="col-3">col-3</span>
+                <span class="col-2">col-2</span>
+                <span class="col-3">col-3</span>
+            </div>
+            <p>offset-left-4 при нормалоном потоке</p>
+            <div class="flex-row">
+                <span class="col-2 offset-left-2">offset-left-2 col-2</span>
+                <span class="col-2 offset-left-3">offset-left-2 col-2</span>
+            </div>
+            <p>offset-right-4 при орентации контента justify-end</p>
+            <div class="flex-row justify-end">
+                <span class="col-1 offset-right-2">offset-right-2 col-1</span>
+                <span class="col-3 offset-right-5">offset-right-5 col-3</span>
+            </div>
+
+            <h2>Особенности</h2>
+            <p>Если размер ячек превышает размер максимальный размер сетки используйте доп. класс <strong>wrap</strong> (для класса flex-row) который будет осуществлять перенос на новую строку не вмещающиеся блоки.</p>
+            <div class='flex-row wrap'>
+                <span class="col-12">col-12</span>
+                <span class="col-6">col-6</span>
+            </div>
+            <p>Если необходимо что бы не "влазящий" контент при переносе занимал всю ширину, использовать класс box </p>
+            <div class='flex-row wrap'>
+                <span class="col-11">col-11</span>
+                <span class="col-1">col-1</span>
+                <span class="box">class Box</span>
+            </div>
+            <p>Для автоматическо (равномерного) ропределения длинны элемента можно использовать класс .box</p>
+            <div class="flex-row wrap">
+                <p class="box">not have size Class BOX</p>
+                <p class="box">not have size</p>
+                <p class="box">not have size</p>
+            </div>
         </div>
-        <h2>flex-row-stick</h2>
-         <div class='flex-row-stick'>
-            <span class="col-3">3</span>   
-            <span class="col-3">3</span>   
-            <span class="col-3">3</span>   
-            <span class="col-3">3</span>   
-        </div>
-        <div class='flex-row-stick'>
-            <span class="col-2">2</span>       
-            <span class="col-1">1</span>               
-            <span class="col-1">1</span>               
-            <span class="col-1">1</span>               
-            <span class="col-1">1</span>               
-        </div>
-         <div class='flex-row-stick'>
-            <span class="col-6">6</span>   
-            <span class="col-6">6</span>   
-        </div>  
-        <h2>Media flex-row-stick </h2>     
-        <div class='flex-row-stick'>
-            <sapn class="col-6 col-lg-11 col-md-6 col-sm-8 col-xs-1">col-6 col-lg-12 col-md-6 col-sm-8 col-xs-12</sapn>
-            <sapn class="col-6 col-lg-1 col-md-6 col-sm-4 col-xs-11">col-6 col-lg-1 col-md-6 col-sm-4 col-xs-11</sapn>
-        </div> 
-        <h2>Insert another flex-row</h2>
+
+
+        <h2>Вставка в другие col flex-row</h2>
         <div class="flex-row">
             <span class="col-2">2</span>
             <span class="col-10">
                 <div class="flex-row">
-                    <span class="col-3">3</span>
                     <span class="col-2">2</span>
+                    <span class="col-2">2</span>
+                    <span class="col-1">1</span>
                     <span class="col-1">1</span>
                     <span class="col-6">6</span>
                 </div>
             </span>
         </div>
-        <div class="flex-row">
-            <p class="box">not have size Class BOX</p>
-            <p class="box">not have size</p>
-            <p class="box">not have size</p>
+
+
+        <h2>Media запросы</h2>
+        <div class="container">
+            <div class="flex-row">
+                <sapn class="col-6 col-lg-11 col-md-6 col-sm-8 col-xs-1">col-6 col-lg-12 col-md-6 col-sm-8 col-xs-12</sapn>
+                <sapn class="col-6 col-lg-1 col-md-6 col-sm-4 col-xs-11">col-6 col-lg-1 col-md-6 col-sm-4 col-xs-11</sapn>
+            </div>
+
+            <div class="flex-row-stick">
+                <sapn class="col-6 col-lg-11 col-md-6 col-sm-8 col-xs-1">col-6 col-lg-12 col-md-6 col-sm-8 col-xs-12</sapn>
+                <sapn class="col-6 col-lg-1 col-md-6 col-sm-4 col-xs-11">col-6 col-lg-1 col-md-6 col-sm-4 col-xs-11</sapn>
+            </div>
         </div>
     </div>
   
-    <h2>Media qoaries</h2>
-    <div class="container">
-        <div class="flex-row">
-            <sapn class="col-6 col-lg-11 col-md-6 col-sm-8 col-xs-1">col-6 col-lg-12 col-md-6 col-sm-8 col-xs-12</sapn>
-            <sapn class="col-6 col-lg-1 col-md-6 col-sm-4 col-xs-11">col-6 col-lg-1 col-md-6 col-sm-4 col-xs-11</sapn>
-        </div>
-    </div>
 </body>
 </html>
