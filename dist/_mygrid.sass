@@ -60,17 +60,23 @@ $media: ('lg': '1100', 'md': '960', 'sm':'768', 'xs': '567');
 =col($n)
   width:  calc(#{$default-width-col*$n} - #{$margin-l-r * 2}) 
 
+=absolute-col($x)
+  width: calc( #{$max-width}/(12/#{$x}) - #{$margin-l-r * 2})
+
 =colSlick($x)
     width:  calc( (#{$big-width-row}/ #{$columns} * #{$x}) - #{$margin-l-r * 2} ) 
 
 // Compiller
 [class*="col-"], 
+[class*="absolute-col-"], 
 .box 
     margin: $margin-t-b $margin-l-r
     padding: $padding-t-b $padding-l-r
     box-sizing: border-box
 
 @for $i from 1 through $columns
+    .absolute-col-#{$i}
+        +absolute-col($i)
     .col-#{$i}
         +col($i)
 
