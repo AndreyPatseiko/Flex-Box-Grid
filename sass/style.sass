@@ -1,0 +1,25 @@
+@import 'grid.css'
+
+body
+    background: #45576d
+    color: whitesmoke
+    min-height: 90vh
+    p,h3
+        margin: .3em 0
+    h2,h1
+        margin: 1em 0 .3em
+    .container
+        max-width: 1300px
+        margin: 1em auto
+        > [class*='flex-']
+            >[class*='col-'],
+            .box
+                display: inline-block
+                min-height: 2em
+                background: rgba(0,0,0,.6)
+            [class*='flex-']
+                background: rgba(100,0,0,.6)
+                span
+                    background: rgba(0,100,0,.6)
+.m-l-1
+    margin-left: 2em

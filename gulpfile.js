@@ -12,12 +12,12 @@ gulp.task('browser-sync', function() {
 });
 
 gulp.task('sass', function(){
-    return gulp.src(['./dist/style.sass']) 
+    return gulp.src(['./sass/**/*.sass'])
         .pipe(sass()) 
         .pipe(gulp.dest('./dist/css/')) 
         .pipe(browserSync.reload({stream: true}))
 });
 
-gulp.task('watch',['browser-sync', 'sass'], function(){
-    gulp.watch('./dist/**/*.sass', ['sass']);
-})
+gulp.task('default',['browser-sync', 'sass'], function(){
+    gulp.watch('./sass/**/*.sass', ['sass']);
+});
