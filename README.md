@@ -4,7 +4,7 @@ Install the dependencies.
 ```sh
 $ projectFolder/npm install
 ```
-Set options for your grid in sass/grid.sass.
+Set options for your grid in sass/grid_settings.sass.
 Then run command:
 ```sh
 $ projectFolder/gulp

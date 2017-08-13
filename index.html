@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Test smart grid</title>
+    <title>APV flex grid</title>
     <link rel="stylesheet" href="./dist/css/style.css">
 </head>
 <body>
-    <div class="container">
-        <div>
-            <div>
-            <a href="#">Text</a>
-            <ul class='absolute-col-10 absolute-blue'>
+    <div class="container relative">
+        <div class="flex-row-stick">
+            <div class="col-12">
+                <p>Необходимы дороботки данного класса!! Т.к. сложности с позицонированнаием элемнтов.</p>
+                <p>Абсолютно спозиционированный блок берет расчитывается из максимального размер .container, из переменной $container-max-width</p>
+                <p>Размер можно менять согласно обычным медиа запросам</p>
+            <ul class='absolute-col-12  absolute-col-sm-1 absolute-blue'>
                 <li>
                     <span>
                         t
@@ -39,7 +41,7 @@
         </div>
 
 
-        <div class='flex-row'>
+        <div class='flex-row-stick'>
             <span class="col-1">1</span>
             <span class="col-2">2</span>
             <span class="col-1">1</span>
@@ -99,9 +101,9 @@
         </div>
     </div>
   
-    <h2>Media qoaries</h2>
     <div class="container">
-        <div class="flex-row">
+        <h2>Media qoaries</h2>
+        <div class="flex-row-stick">
             <sapn class="col-6 col-lg-11 col-md-6 col-sm-8 col-xs-1">col-6 col-lg-12 col-md-6 col-sm-8 col-xs-12</sapn>
             <sapn class="col-6 col-lg-1 col-md-6 col-sm-4 col-xs-11">col-6 col-lg-1 col-md-6 col-sm-4 col-xs-11</sapn>
         </div>

@@ -1,21 +1,10 @@
-//settings
-$max-width: 100% 
-$columns: 12
-$margin-l-r: .5em
-$margin-t-b: .5em
-$padding-l-r: 1em
-$padding-t-b: .5em
-$container-max-width: 1366px
-$container-min-width: 320px
+@import "grid_settings"
+
 $default-width-col: 100%/$columns
-// media
-$media: ('lg': '1100', 'md': '960', 'sm':'768', 'xs': '567')
-//=======     END Settings      ===========
-
 .container
-  max-width: $max-width
+  max-width: $container-max-width
   margin: 0 auto
-
+  position: relative
 .flex-row
   display: flex
   justify-content: flex-start
@@ -50,10 +39,15 @@ $media: ('lg': '1100', 'md': '960', 'sm':'768', 'xs': '567')
     flex-grow: 1
 
 =col($n)
-  width:  calc(#{$default-width-col*$n} - #{$margin-l-r * 2}) 
+  width:  calc(#{$default-width-col*$n} - #{$margin-l-r * 2})
+=absolute-col($x)
+  width: calc( #{$container-max-width}/(#{$columns}/#{$x}))
+=colSlick($x)
+  width:  calc( (#{$big-width-row}/ #{$columns} * #{$x}) - #{$margin-l-r * 2} )
 
 // Compiler
-[class*="col-"], 
+[class*="col"],
+[class*="absolute-col"],
 .box 
   margin: $margin-t-b $margin-l-r
   padding: $padding-t-b $padding-l-r
@@ -64,9 +58,19 @@ $media: ('lg': '1100', 'md': '960', 'sm':'768', 'xs': '567')
     margin-left: -$padding-l-r
     width: calc(100% + #{$padding-l-r * 2})
 
+[class*="col"],
+.box
+  position: relative
+[class*='absolute-col']
+  position: absolute
+  margin-right: 0
+  margin-left: 0
+
 @for $i from 1 through $columns
     .col-#{$i}
         +col($i)
+    .absolute-col-#{$i}
+        +absolute-col($i)
     .offset-left-#{$i}
         margin-left: calc(#{$default-width-col*$i} + #{$margin-l-r})
     .offset-right-#{$i}
@@ -77,4 +81,6 @@ $media: ('lg': '1100', 'md': '960', 'sm':'768', 'xs': '567')
     @media all and (max-width: #{$size}px)
         @for $i from 1 through $columns
             .col-#{$name}-#{$i}
-                +col($i)    
+                +col($i)
+            .absolute-col-#{$name}-#{$i}
+              +absolute-col($i)
